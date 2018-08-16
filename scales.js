@@ -1,0 +1,6 @@
+let maj7 = [0, 4, 7, 11]
+let min7 = [0, 3, 7, 10]
+let quintal = [0, 7, 14, 21]
+let quartal = [0, 5, 10, 15]
+let aeolian = [0, 2, 3, 5, 7, 8, 10]
+let ionian = [0, 2, 4, 5, 7, 9, 11]
