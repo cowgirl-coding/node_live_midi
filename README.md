@@ -23,3 +23,7 @@ send midi data out to.
 + Load functions and note arrays from other files, such as `transpositions.js`
   and `scales.js` as needed.
 
+**Note:** on Linux (Ubuntu / Raspbian) you may see the following during
+install: `fatal error: alsa/asoundlib.h: No such file or directory`. You can
+install the missing header file with `sudo apt-get install libasound2-dev` then
+re-run `npm install`.
