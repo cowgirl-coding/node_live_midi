@@ -1,8 +1,10 @@
 const midi = require('midi')
 const R = require('ramda')
 
+const NOTE = 'NOTE'
+
 const Note = (value, dur = 16) => {
-  return { value, dur }
+  return { value, dur, type: NOTE }
 }
 
 const starterNotes = [
