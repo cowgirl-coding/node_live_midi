@@ -10,12 +10,10 @@ const replicate = (times, value) => {
 }
 
 const every = (num, fn, arr) => {
-  console.log('every')
   const output = []
   for (i = 0; i < arr.length; i++) {
     if (i % num === 0) {
       const newValue = fn(arr[i])
-      console.log('new Value: ', newValue)
       output.push(newValue)
     }
     else {
@@ -47,6 +45,7 @@ const chord = (chordName, note) => {
   return output
 }
 
+// TODO: rename as stuff
 const cram = (scale, note) => {
   const output = []
   for (i = 0; i < scale.length; i++) {
