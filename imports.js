@@ -6,7 +6,9 @@ const {
 } = require('./testSetup')
 
 const {
+  binary,
   broadcast: bc,
+  every,
   every2,
   replicate: rep,
   chord,
