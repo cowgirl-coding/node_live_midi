@@ -33,12 +33,21 @@ exports.sequence = R.curry((oct, seq) => {
 // apply a scale or sequence to a note, playing the entire sequence
 // every within the time value of the original note.js
 exports.squeeze = R.curry((scale, note) => {
+  const mode = typeof scale
   const output = []
   let value, duration
-  for (let i = 0; i < scale.length; i++) {
-    value = note.value + scale[i]
+  if (mode === 'object') {
     duration = note.dur * scale.length
-    output.push(Note(duration, value))
+    for (let i = 0; i < scale.length; i++) {
+      value = note.value + scale[i]
+      output.push(Note(duration, value))
+    }
+  }
+  else if (mode === 'number') {
+    duration = note.dur * scale
+    for (let i = 0; i < scale; i++) {
+      output.push(Note(duration, note.value))
+    }
   }
   return output
 })

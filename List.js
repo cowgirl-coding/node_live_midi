@@ -30,6 +30,9 @@ const every2 = (num, fn, arr) => R.flatten(
   arr.map((d, i) => i % num === 0 ? fn(d) : d)
 )
 
+// FIXME binary returns an empty array if given a number
+// and also toString only returns the smallest number of bits
+// to represent number
 const binary = (byte, fn, arr) => {
   let binArray
   let output = []
@@ -42,6 +45,9 @@ const binary = (byte, fn, arr) => {
   }
   else if (typeof byte === 'string') {
     binArray = byte.split('')
+    for (let i = 0; i < binArray.length; i++) {
+      binArray[i] = parseInt(binArray[i])
+    }
   }
   else {
     throw 'WTF did you do?'
