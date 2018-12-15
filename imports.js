@@ -2,18 +2,19 @@ const R = require('ramda')
 
 const { Session } = require('./testSetup')
 
-const Note = require('./note')
+const { 
+  arp,
+  Note, 
+  sequence,
+  squeeze,
+} = require('./note')
 
 const {
   binary,
-  broadcast: bc,
+  broadcast,
   every,
   every2,
-  replicate: rep,
-  chord,
-  squeeze,
-  sequence,
-  transpose: trans,
+  replicate,
 } = require('./List')
 
 const Scales = require('./scales')

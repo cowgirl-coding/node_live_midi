@@ -12,16 +12,6 @@ const replicate = (times, value) => {
 const broadcast = (fn, arr) => 
   R.flatten(arr.map(fn))
 
-const sequence = (oct, seq) => {
-  let value
-  let output = []
-  for (let i = 0; i < seq.length; i++) {
-    value = 12 * oct + seq[i]
-    output.push(Note(16, value))
-  }
-  return output
-} 
-
 const every = (num, fn, arr) => {
   const output = []
   for (let i = 0; i < arr.length; i++) {
@@ -70,40 +60,10 @@ const binary = (byte, fn, arr) => {
   return R.flatten(output)
 }
 
-// Note functions
-const transpose = (amt, note) => ({
-  ...note,
-  value: note.value + amt,
-})
-
-const chord = (chordName, note) => {
-  const output = []
-  for (let i = 0; i < chordName.length; i++) {
-    harmony = note.value + chordName[i]
-    output.push(Note(harmony))
-    console.log('output: ', output)
-  }
-  return output
-}
-
-const squeeze = (scale, note) => {
-  const output = []
-  for (let i = 0; i < scale.length; i++) {
-    value = note.value + scale[i]
-    duration = note.dur * scale.length
-    output.push(Note(value, duration))
-  }
-  return output
-}
-
 module.exports = {
   binary: R.curry(binary),
   broadcast: R.curry(broadcast),
-  chord: R.curry(chord),
-  squeeze: R.curry(squeeze),
   every: R.curry(every),
   every2: R.curry(every2),
   replicate: R.curry(replicate),
-  sequence: R.curry(sequence),
-  transpose: R.curry(transpose),
 }

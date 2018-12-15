@@ -1,7 +1,7 @@
 const midi = require('midi')
 const R = require('ramda')
 
-const Note = require('./note')
+const { Note } = require('./note')
 
 const starterNotes = [
   44, 40, 52, 57
