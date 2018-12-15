@@ -26,7 +26,8 @@ function Session(portNum) {
   console.log('Session Initialized!')
 
   this.setNotes =function(notes) {
-    this.notes = notes
+
+    this.notes = R.flatten(notes)
   }
 
   this.note = function(x) {

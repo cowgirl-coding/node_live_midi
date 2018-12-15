@@ -9,6 +9,9 @@ const replicate = (times, value) => {
   return output
 }
 
+const broadcast = (fn, arr) => 
+  R.flatten(arr.map(fn))
+
 const every = (num, fn, arr) => {
   const output = []
   for (i = 0; i < arr.length; i++) {
@@ -23,11 +26,9 @@ const every = (num, fn, arr) => {
   return output
 }
 
-const every2 = (num, fn, arr) => {
-  return arr.map((d, i) =>
-    i % num === 0 ? fn(d) : d
-  )
-}
+const every2 = (num, fn, arr) => R.flatten(
+  arr.map((d, i) => i % num === 0 ? fn(d) : d)
+)
 
 // Note functions
 const transpose = (amt, note) => ({
@@ -45,8 +46,7 @@ const chord = (chordName, note) => {
   return output
 }
 
-// TODO: rename as stuff
-const cram = (scale, note) => {
+const squeeze = (scale, note) => {
   const output = []
   for (i = 0; i < scale.length; i++) {
     value = note.value + scale[i]
@@ -57,8 +57,9 @@ const cram = (scale, note) => {
 }
 
 module.exports = {
+  broadcast: R.curry(broadcast),
   chord: R.curry(chord),
-  cram: R.curry(cram),
+  squeeze: R.curry(squeeze),
   every: R.curry(every),
   every2: R.curry(every2),
   replicate: R.curry(replicate),
