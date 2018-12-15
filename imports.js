@@ -1,9 +1,8 @@
 const R = require('ramda')
 
-const {
-  Session,
-  Note,
-} = require('./testSetup')
+const { Session } = require('./testSetup')
+
+const Note = require('./note')
 
 const {
   binary,

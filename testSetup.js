@@ -1,18 +1,11 @@
 const midi = require('midi')
 const R = require('ramda')
 
-const NOTE = 'NOTE'
-
-const Note = (value, dur = 16) => {
-  return { value, dur, type: NOTE }
-}
+const Note = require('./note')
 
 const starterNotes = [
-  Note(40),
-  Note(52),
-  Note(42),
-  Note(47),
-]
+  44, 40, 52, 57
+].map(Note(16))
 
 function Session(portNum) {
   this.output = new midi.output()
