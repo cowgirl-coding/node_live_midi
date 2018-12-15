@@ -12,7 +12,10 @@ const {
   replicate: rep,
   chord,
   squeeze,
+  sequence,
   transpose: trans,
 } = require('./List')
 
 const Scales = require('./scales')
+
+const Sequences = require('./sequences')

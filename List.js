@@ -12,6 +12,16 @@ const replicate = (times, value) => {
 const broadcast = (fn, arr) => 
   R.flatten(arr.map(fn))
 
+const sequence = (oct, seq) => {
+  let value
+  let output = []
+  for (let i = 0; i < seq.length; i++) {
+    value = 12 * oct + seq[i]
+    output.push(Note(16, value))
+  }
+  return output
+} 
+
 const every = (num, fn, arr) => {
   const output = []
   for (let i = 0; i < arr.length; i++) {
@@ -94,5 +104,6 @@ module.exports = {
   every: R.curry(every),
   every2: R.curry(every2),
   replicate: R.curry(replicate),
+  sequence: R.curry(sequence),
   transpose: R.curry(transpose),
 }
