@@ -11,6 +11,37 @@ exports.arp = R.curry((chordName, note) => {
   return output
 })
 
+exports.binaryInterval = R.curry((bin, interval, fn, arr) => {
+  let output = []
+  let binArray = bin.split('')
+  let elapsed = 1 / interval
+  let bitCount = 0
+  let activeBit
+  let progress
+  for (let i = 0; i < binArray.length; i++) {
+    binArray[i] = parseInt(binArray[i])
+  }
+  for (let i = 0; i < arr.length; i++) {
+    progress = elapsed % (1 / interval)
+    if (progress === 0) {
+      activeBit = bitCount % binArray.length
+      if (binArray[activeBit]) {
+        output.push(fn(arr[i]))
+      }
+      else {
+        output.push(arr[i])
+      }
+      elapsed = 1 / arr[i].dur
+      bitCount++
+    }
+    else {
+      output.push(arr[i])
+      elapsed += 1 / arr[i].dur
+    }
+  }
+  return R.flatten(output)
+})
+
 const Note = R.curry((dur, value) => ({
   value, 
   dur, 
@@ -35,7 +66,7 @@ exports.everyInterval = R.curry((interval, fn, arr) => {
   let output = []
   for (let i = 0; i < arr.length; i++) {
     note = arr[i]
-    if (elapsed >= 1 / interval) {
+    if (elapsed % (1 / interval) === 0) {
       output.push(fn(note))
       elapsed = 1 / note.dur
     }

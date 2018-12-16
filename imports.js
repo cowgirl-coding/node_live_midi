@@ -9,6 +9,7 @@ const {
   squeeze,
   transpose,
   everyInterval,
+  binaryInterval,
 } = require('./note')
 
 const {
