@@ -1,16 +1,44 @@
-const { Session, Note } = require('./testSetup')
-const { every, transpose, replicate: rep } = require('./List')
-let s = new Session()
-s.init()
-s.play()
-s.stop()
-let n, a, b, c, d, e, f, g, x
-let List = require('./List')
-n = s.notes
-maj7 = [0, 4, 7, 11]
-const { cram, chord } = require('./List')
-let R = require('ramda')
-let { every2 } = List
-n = s.notes
+const R = require('ramda')
+const { Session } = require('./testSetup')
+const { 
+  arp,
+    Note, 
+      sequence,
+        squeeze,
+        } = require('./note')
+        const {
+          binary,
+            broadcast,
+              every,
+                every2,
+                  replicate,
+                  } = require('./List')
+                  const Scales = require('./scales')
+                  const Sequences = require('./sequences')
+                  
+const bc = broadcast
+const rep = replicate
+const f = R.flatten
+const p = R.pipe
+const ev = every
+const seq5 = sequence(5)
+const seq4 = sequence(4)
 
-const Scales = require('./scales')
+let s = new Session(1)
+s.play()
+s.notes
+s.setNotes(seq5(Sequences.batcave))
+s.stop()
+s.play()
+let x = s.notes
+x
+x = binary('00101010', squeeze(3), x)
+x
+s.setNotes(x)
+let a = x
+a
+x
+x = ev(8, squeeze(Scales.ionian), x)
+s.setNotes(x)
+x
+s.setNotes(a)

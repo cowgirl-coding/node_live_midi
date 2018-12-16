@@ -1,17 +1,20 @@
 const R = require('ramda')
 
-const { Session } = require('./testSetup')
+const Session = require('./Session')
 
 const { 
   arp,
   Note, 
   sequence,
   squeeze,
+  transpose,
+  everyInterval,
 } = require('./note')
 
 const {
   binary,
   broadcast,
+  condition,
   every,
   every2,
   replicate,

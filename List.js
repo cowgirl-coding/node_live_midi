@@ -1,18 +1,17 @@
 const R = require('ramda')
-const { Note } = require('./testSetup')
 
-const replicate = (times, value) => {
+exports.replicate = R.curry((times, value) => {
   const output = []
   for (let i = 0; i < times; i++) {
     output.push(value)
   }
   return output
-}
+})
 
-const broadcast = (fn, arr) => 
-  R.flatten(arr.map(fn))
+exports.broadcast = R.curry((fn, arr) => 
+  R.flatten(arr.map(fn)))
 
-const every = (num, fn, arr) => {
+exports.every = R.curry((num, fn, arr) => {
   const output = []
   for (let i = 0; i < arr.length; i++) {
     if (i % num === 0) {
@@ -24,7 +23,7 @@ const every = (num, fn, arr) => {
     }
   }
   return R.flatten(output)
-}
+})
 
 const every2 = (num, fn, arr) => R.flatten(
   arr.map((d, i) => i % num === 0 ? fn(d) : d)
@@ -33,7 +32,7 @@ const every2 = (num, fn, arr) => R.flatten(
 // FIXME binary returns an empty array if given a number
 // and also toString only returns the smallest number of bits
 // to represent number
-const binary = (byte, fn, arr) => {
+exports.binary = R.curry((byte, fn, arr) => {
   let binArray
   let output = []
   let binIndex, activeBit
@@ -64,12 +63,21 @@ const binary = (byte, fn, arr) => {
   }
 
   return R.flatten(output)
-}
+})
 
-module.exports = {
-  binary: R.curry(binary),
-  broadcast: R.curry(broadcast),
-  every: R.curry(every),
-  every2: R.curry(every2),
-  replicate: R.curry(replicate),
-}
+// applies a function to all members of an array for which
+// a provided condition is true
+exports.condition = R.curry((cond, fn, arr) => {
+  let output = []
+  let condBool
+  for (let i = 0; i < arr.length; i++) {
+    condBool = cond(arr[i])
+    if (condBool) {
+      output.push(fn(arr[i]))
+    }
+    else {
+      output.push(arr[i])
+    }
+  } 
+  return R.flatten(output)
+})

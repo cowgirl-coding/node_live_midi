@@ -6,8 +6,7 @@ exports.arp = R.curry((chordName, note) => {
   const output = []
   for (let i = 0; i < chordName.length; i++) {
     harmony = note.value + chordName[i]
-    output.push(Note(harmony))
-    console.log('output: ', output)
+    output.push(Note(note.dur, harmony))
   }
   return output
 })
@@ -29,6 +28,24 @@ exports.sequence = R.curry((oct, seq) => {
   }
   return output
 }) 
+
+exports.everyInterval = R.curry((interval, fn, arr) => {
+  let elapsed = 1 / interval
+  let note
+  let output = []
+  for (let i = 0; i < arr.length; i++) {
+    note = arr[i]
+    if (elapsed >= 1 / interval) {
+      output.push(fn(note))
+      elapsed = 1 / note.dur
+    }
+    else {
+      output.push(note)
+      elapsed += 1 / note.dur
+    }
+  } 
+  return R.flatten(output)
+})
 
 // apply a scale or sequence to a note, playing the entire sequence
 // every within the time value of the original note.js
